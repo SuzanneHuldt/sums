@@ -1,4 +1,9 @@
 class Main
+  def initialize
+    @stash = []
+    @operands = []
+    @operator = []
+  end
   def element1(num)
     operand1 = Array.new(num)
     return operand1
@@ -9,7 +14,7 @@ class Main
     return operand2
   end
 
-  def add(num1, num2 )
+  def add(num1, num2)
      result = concat_array(element1(num1), element2(num2))
     return result.length
   end
@@ -22,21 +27,30 @@ class Main
   end
 
   def parse(input)
-    stash = []
-    operands = []
     is_digit = /\d/
+    is_plus = /\+/
     string = input.split('')
     string.push(' ')
     for x in string
       y = string.index(x)
-      stash.push([x, string[(y+1)]])
+      @stash.push([x, string[(y+1)]])
     end
-    for x in stash
+    for x in @stash
       if x[1] == ' ' && !!(x[0] =~ is_digit)
-        operands.push(x[0])
+        @operands.push(x[0])
       end
     end
-    return operands
+    for x in @stash
+      if x[1] == ' ' && !!(x[0] =~ is_plus)
+        @operator.push(x[0])
+      end
+    end
   end
 
+  def do_sum(input)
+    parse(input)
+    if @operator[0] = "+"
+      return add(@operands[0].to_i, @operands[1].to_i)
+    end
+  end
 end
