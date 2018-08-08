@@ -23,12 +23,20 @@ class Main
 
   def parse(input)
     stash = []
+    operands = []
+    is_digit = /\d/
     string = input.split('')
-    p input
+    string.push(' ')
     for x in string
       y = string.index(x)
       stash.push([x, string[(y+1)]])
     end
-    return stash
+    for x in stash
+      if x[1] == ' ' && !!(x[0] =~ is_digit)
+        operands.push(x[0])
+      end
+    end
+    return operands
   end
+
 end
