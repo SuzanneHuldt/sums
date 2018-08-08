@@ -11,7 +11,6 @@ class Main
 
   def add(num1, num2 )
      result = concat_array(element1(num1), element2(num2))
-  #  result = element1(num1).concat(element2(num2))
     return result.length
   end
 
@@ -20,5 +19,16 @@ class Main
       arr2.push(x)
     end
     return arr2
+  end
+
+  def parse(input)
+    stash = []
+    string = input.split('')
+    p input
+    for x in string
+      y = string.index(x)
+      stash.push([x, string[(y+1)]])
+    end
+    return stash
   end
 end
