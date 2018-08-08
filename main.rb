@@ -3,6 +3,8 @@ class Main
     @stash = []
     @operands = []
     @operator = []
+    @is_digit = /\d/
+    @is_plus = /\+/
   end
   def element1(num)
     operand1 = Array.new(num)
@@ -27,22 +29,24 @@ class Main
   end
 
   def parse(input)
-    is_digit = /\d/
-    is_plus = /\+/
     string = input.split('')
     string.push(' ')
-    for x in string
-      y = string.index(x)
-      @stash.push([x, string[(y+1)]])
-    end
+    single(string)
     for x in @stash
-      if x[1] == ' ' && !!(x[0] =~ is_digit)
-        @operands.push(x[0])
+      if x[1] == ' ' && !!(x[0] =~ @is_plus)
+        @operator.push(x[0])
       end
     end
+  end
+
+  def single(string)
+    for x in string
+      y = string.index(x)
+      @stash.push([x, string[(add(y,1))]])
+    end
     for x in @stash
-      if x[1] == ' ' && !!(x[0] =~ is_plus)
-        @operator.push(x[0])
+      if x[1] == ' ' && !!(x[0] =~ @is_digit)
+        @operands.push(x[0])
       end
     end
   end
