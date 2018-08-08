@@ -32,11 +32,7 @@ class Main
     string = input.split('')
     string.push(' ')
     single(string)
-    for x in @stash
-      if x[1] == ' ' && !!(x[0] =~ @is_plus)
-        @operator.push(x[0])
-      end
-    end
+    plus(string)
   end
 
   def single(string)
@@ -47,6 +43,14 @@ class Main
     for x in @stash
       if x[1] == ' ' && !!(x[0] =~ @is_digit)
         @operands.push(x[0])
+      end
+    end
+  end
+
+  def plus(string)
+    for x in @stash
+      if x[1] == ' ' && !!(x[0] =~ @is_plus)
+        @operator.push(x[0])
       end
     end
   end
