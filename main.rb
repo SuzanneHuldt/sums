@@ -9,8 +9,16 @@ class Main
     return operand2
   end
 
-  def add(operand1, operand2)
-    result = operand2.concat(operand2)
-    return result
+  def add(num1, num2 )
+     result = concat_array(element1(num1), element2(num2))
+  #  result = element1(num1).concat(element2(num2))
+    return result.length
+  end
+
+  def concat_array(arr1, arr2)
+    for x in arr1
+      arr2.push(x)
+    end
+    return arr2
   end
 end
